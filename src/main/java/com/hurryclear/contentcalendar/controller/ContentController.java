@@ -2,6 +2,7 @@ package com.hurryclear.contentcalendar.controller;
 
 import com.hurryclear.contentcalendar.model.Content;
 import com.hurryclear.contentcalendar.repository.ContentCollectionRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -85,7 +86,9 @@ public class ContentController {
     what does the method "create" create?
      */
     @PostMapping("")
-    public void create(@RequestBody Content content) {
+    // @Valid (add validation dependency first):
+    // check if the content is qualified to be used, doesn't break constrains: @NotBland, @NotNull,...
+    public void create(@Valid @RequestBody Content content) {
         repository.save(content);
     }
 
