@@ -27,11 +27,16 @@ In this case, all methods in ContentController will handle requests with paths s
 @RequestMapping("/api/content")
 
 /*
+@CrossOrigin
+For security?
+ */
+@CrossOrigin
+
+/*
 what is controller?
 Controller is a class that accept request and return a response
 And in spring boot application we call Spring MVC controller
 */
-
 public class ContentController {
 
     private final ContentCollectionRepository repository;
