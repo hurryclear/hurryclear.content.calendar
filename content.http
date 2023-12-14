@@ -18,3 +18,33 @@ Content-Type: application/json
   "dateUpdated": null,
   "url": ""
 }
+
+### Update existing Content
+PUT http://localhost:8080/api/content/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "MY FIRST BOLG POST!!!!!",
+  "desc": "MY FIRST BOLG POST!!!!!",
+  "status": "IDEA",
+  "contentType": "ARTICLE",
+  "dateCreated": "2023-12-14T16:42:05.79865",
+  "dateUpdated": "2023-12-14T16:42:05.79865",
+  "url": "http://localhost:8080/my-first-blog-post"
+}
+
+### Update existing Content with invalid id
+PUT http://localhost:8080/api/content/99
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "MY FIRST BOLG POST!!!!!",
+  "desc": "MY FIRST BOLG POST!!!!!",
+  "status": "IDEA",
+  "contentType": "ARTICLE",
+  "dateCreated": "2023-12-14T16:42:05.79865",
+  "dateUpdated": "2023-12-14T16:42:05.79865",
+  "url": "http://localhost:8080/my-first-blog-post"
+}

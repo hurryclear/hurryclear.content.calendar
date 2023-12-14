@@ -75,7 +75,7 @@ public class ContentController {
 
 
     // Create
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED) // When we create sth, we want to see it has been created
     /*
     what does the method "create" create?
      */
@@ -83,4 +83,18 @@ public class ContentController {
     public void create(@RequestBody Content content) {
         repository.save(content);
     }
+
+
+    // Update
+
+    @PutMapping("/{id}")
+    public void update(@RequestBody Content content, @PathVariable Integer id) {
+        if(!repository.existById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!");
+        }
+        repository.save(content);
+    }
+
+
+    // Delete
 }
