@@ -35,7 +35,7 @@ public class ContentCollectionRepository {
 
 
     public void save(Content content) {
-        contentList.removeIf(c -> c.id().equals(content.id()));
+//        contentList.removeIf(c -> c.id().equals(content.id())); // In my case I don't need this, if I use it, post will not work
         contentList.add(content);
     }
 
@@ -56,5 +56,9 @@ public class ContentCollectionRepository {
 
     public boolean existById(Integer id) {
         return contentList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void delete(Integer id) {
+        contentList.removeIf(c -> c.id().equals(id));
     }
 }
