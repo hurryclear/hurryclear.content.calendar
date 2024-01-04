@@ -1,7 +1,10 @@
 package com.hurryclear.contentcalendar.controller;
 
 import com.hurryclear.contentcalendar.model.Content;
+import com.hurryclear.contentcalendar.model.Status;
 import com.hurryclear.contentcalendar.repository.ContentCollectionRepository;
+import com.hurryclear.contentcalendar.repository.ContentJdbcTemplateRepository;
+import com.hurryclear.contentcalendar.repository.ContentRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,11 +43,11 @@ And in spring boot application we call Spring MVC controller
 */
 public class ContentController {
 
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
-
+//private final ContentJdbcTemplateRepository repository;
     @Autowired //if you only have one public constructor in your class, it is implicit, so you don't need Autowired
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
 
         this.repository = repository;
         /*
@@ -97,7 +100,7 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@RequestBody Content content, @PathVariable Integer id) {
-        if(!repository.existById(id)) {
+        if(!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!");
         }
         repository.save(content);
@@ -108,6 +111,16 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
+    }
+
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword) {
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    @GetMapping("/filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status) {
+        return repository.listByStatus(status);
     }
 }

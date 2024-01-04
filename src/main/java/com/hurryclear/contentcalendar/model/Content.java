@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 // @Table(value = "tbl_content")
 public record Content(
 
-        @Id // an identifier
+        @Id // (to tell spring data jdbc this is an id entity) an identifier
         Integer id,
         @NotBlank
         String title,
